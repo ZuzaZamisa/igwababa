@@ -1,0 +1,153 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+     GwApp2(),
+  );
+}
+
+class GwApp1 extends StatelessWidget {
+  const GwApp1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Expanded(child: Container()),
+          ],
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text('iGwababa'),
+        ),
+      ),
+    );
+  }
+}
+
+class GwApp2 extends StatefulWidget {
+
+
+  @override
+  State<GwApp2> createState() => _GwApp2State();
+}
+
+
+
+class _GwApp2State extends State<GwApp2> {
+
+  List<String> qText = [
+    'Do you have Gwababa?',
+    'Are you single?',
+  ];
+
+  List<bool> qAnswer = [
+    true,
+    true
+  ];
+
+  int questionNumber = 0;
+  int selftestScore = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('images/qbackground.jpeg'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                      qText[questionNumber],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Container(
+                  color: Colors.green,
+                  child: TextButton(
+                      child: Text(
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                          'True'),
+                      onPressed: () {
+                        bool correctAnswer = qAnswer[questionNumber];
+                        if (correctAnswer == true){
+                          selftestScore++;
+                        }
+                        setState(() {
+                          questionNumber++;
+                          if (questionNumber == 2){
+                            questionNumber = 0;
+                          }
+                        });
+                      }),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Container(
+                  color: Colors.red,
+                  child: TextButton(
+                      child: Text(
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                          'False'),
+                      onPressed: () {
+                        bool correctAnswer = qAnswer[questionNumber];
+                        if (correctAnswer == false){
+                          selftestScore++;
+                        }
+                        setState(() {
+
+                          questionNumber++;
+
+                          if (questionNumber == 2){
+                            questionNumber = 0;
+                          }
+                        });
+                      }),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 14,
+            ),
+          ],
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text('iGwababa'),
+        ),
+      ),
+    );
+  }
+}
